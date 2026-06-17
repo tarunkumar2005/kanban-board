@@ -8,6 +8,7 @@ for (const card of cards) {
 
 for (const list of lists) {
   list.addEventListener("dragover", dragOver);
+  list.addEventListener("dragenter", dragEnter);
   list.addEventListener("dragleave", dragLeave);
   list.addEventListener("drop", dragDrop);
 }
@@ -22,6 +23,11 @@ function dragEnd() {
 
 function dragOver(e) {
   e.preventDefault();
+}
+
+function dragEnter(e) {
+  e.preventDefault();
+  this.classList.add("over");
 }
 
 function dragLeave(e) {
