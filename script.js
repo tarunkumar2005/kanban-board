@@ -36,7 +36,24 @@ function dragLeave(e) {
 
 function dragDrop(e) {
   const id = e.dataTransfer.getData("text/plain");
+
   const card = document.getElementById(id);
-  this.appendChild(card);
+
+  const mousePoint = e.clientY;
+
+  const targetListCards = [...this.querySelectorAll('.card')]
+    .filter(c => c !== card);
+
+  const targetCard = targetListCards.find(c => {
+    const ref = c.getBoundingClientRect()
+    return mousePoint < ref.top + ref.height / 2;
+  })
+
+  if (targetCard) {
+    this.insertBefore(card, targetCard);
+  } else {
+    this.appendChild(card);
+  }
+
   this.classList.remove("over");
 }
